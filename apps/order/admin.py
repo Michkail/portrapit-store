@@ -23,7 +23,7 @@ class OrderTimeInLine(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', order_name, 'status', 'created_at']
-    list_filter = ['creted_at', 'status']
+    list_filter = ['created_at', 'status']
     search_fields = ['first_name', 'address']
     inlines = [OrderTimeInLine]
     actions = [admin_order_shipped]
