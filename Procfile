@@ -1,4 +1,3 @@
-release: python manage.py makemigrations --noinput
-release: python manage.py migrate --noinput
-release: python manage.py createsuperuser
+release: python manage.py makemigrations
+release: python manage.py migrate
 web: gunicorn portrapitstore.wsgi --log-file -
