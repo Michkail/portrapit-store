@@ -15,6 +15,7 @@ STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51HTTGLFtiqxfVe4aOzQOe2mWnmAjUoPSlPkPmx6jd
 STRIPE_API_KEY_HIDDEN = 'sk_test_51HTTGLFtiqxfVe4aZZoJzYKI2KTKvMpB3QA0Pq6lUo3zsyJBjmHjRz9iTGuMDFbS8Lberk5ViWKykx5HHnp3JWHr00yYKd0KUT'
 
 import os
+import django_heroku
 
 from pathlib import Path
 
@@ -148,3 +149,5 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static',)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+django_heroku.settings(locals())
