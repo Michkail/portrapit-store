@@ -1,8 +1,18 @@
 from django.shortcuts import render
 
-# Cre ate your views here.
+from apps.store.models import Product
+
 def frontpage(request):
-    return render(request, 'frontpage.html')
+	products = Product.objects.filter(is_featured=True)
+
+	context = {
+		'products': products
+	}
+
+	return render(request, 'frontpage.html', context)
 
 def contact(request):
-    return render(request, 'contact.html')    
+    return render(request, 'contact.html')
+
+def about(request):
+	return render(request, 'about.html')

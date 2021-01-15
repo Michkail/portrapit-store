@@ -10,6 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+
+STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51HTTGLFtiqxfVe4aOzQOe2mWnmAjUoPSlPkPmx6jdjD8m0jL4nrIWxfNHWlWn3ig785dLgXDjbJOjA31IU4LVRLb00avtYkAqL'
+STRIPE_API_KEY_HIDDEN = 'sk_test_51HTTGLFtiqxfVe4aZZoJzYKI2KTKvMpB3QA0Pq6lUo3zsyJBjmHjRz9iTGuMDFbS8Lberk5ViWKykx5HHnp3JWHr00yYKd0KUT'
+
+import os
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,6 +33,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Cart
+
+SESSION_COOKIE_AGE = 86400
+CART_SESSION_ID = 'cart'
 
 # Application definition
 
@@ -37,8 +47,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheadrs',
-    'apps.core'
+    'corsheaders',
+    'apps.core',
+    'apps.coupon',
+    'apps.cart',
+    'apps.order',
+    'apps.store'
 ]
 
 MIDDLEWARE = [
@@ -66,6 +80,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.store.context_processors.menu_categories',
+                'apps.cart.context_processors.cart'
             ],
         },
     },
@@ -125,11 +141,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_HOST = os.environ.get('DJANGO_STATIC_ROOT')
 STATIC_URL = '/static/'
-
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-CORS_ORIGIN_ALLOW_ALL = True
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
